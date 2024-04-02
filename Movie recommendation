@@ -1,0 +1,125 @@
+import pandas as pd
+
+# Sample movie data
+movies = {
+    'Title': ['The Shawshank Redemption', 'The Godfather', 'The Dark Knight', 'Pulp Fiction', 'The Lord of the Rings: The Return of the King',
+              'Forrest Gump', 'Inception', 'The Matrix', 'Schindler\'s List', 'The Lord of the Rings: The Fellowship of the Ring',
+              'Fight Club', 'The Silence of the Lambs', 'The Lord of the Rings: The Two Towers', 'Star Wars: Episode V - The Empire Strikes Back',
+              'The Green Mile', 'Goodfellas', 'The Godfather: Part II', 'The Usual Suspects', 'Se7en', 'Gladiator',
+              'The Departed', 'The Prestige', 'Saving Private Ryan', 'The Lion King', 'Braveheart',
+              'The Pianist', 'The Sixth Sense', 'Schindler\'s List', 'The Departed', 'The Green Mile',
+              'Inglourious Basterds', 'The Intouchables', 'The Lord of the Rings: The Fellowship of the Ring', 'The Prestige', 'The Dark Knight',
+              'The Godfather', 'The Shawshank Redemption', 'The Lord of the Rings: The Return of the King', 'The Godfather: Part II', 'The Dark Knight',
+              '12 Angry Men', 'The Lord of the Rings: The Two Towers', 'The Matrix', 'Forrest Gump', 'Inception',
+              'Goodfellas', 'One Flew Over the Cuckoo\'s Nest', 'The Lord of the Rings: The Fellowship of the Ring', 'The Godfather: Part II'],
+    'Genre': ['Drama', 'Crime', 'Action', 'Crime', 'Adventure',
+              'Drama', 'Action', 'Action', 'Biography', 'Adventure',
+              'Drama', 'Crime', 'Adventure', 'Action', 'Drama',
+              'Crime', 'Crime', 'Crime', 'Crime', 'Crime',
+              'Crime', 'Drama', 'Drama', 'Animation', 'Biography',
+              'Biography', 'Drama', 'Biography', 'Crime', 'Drama',
+              'Drama', 'Comedy', 'Adventure', 'Drama', 'Action',
+              'Crime', 'Drama', 'Adventure', 'Crime', 'Action',
+              'Drama', 'Drama', 'Adventure', 'Drama', 'Action',
+              'Crime', 'Drama', 'Adventure', 'Crime'],
+    'Director': ['Frank Darabont', 'Francis Ford Coppola', 'Christopher Nolan', 'Quentin Tarantino', 'Peter Jackson',
+                 'Robert Zemeckis', 'Christopher Nolan', 'Lana Wachowski, Lilly Wachowski', 'Steven Spielberg', 'Peter Jackson',
+                 'David Fincher', 'Jonathan Demme', 'Peter Jackson', 'Irvin Kershner', 'Frank Darabont',
+                 'Martin Scorsese', 'Francis Ford Coppola', 'Bryan Singer', 'David Fincher', 'Ridley Scott',
+                 'Martin Scorsese', 'Christopher Nolan', 'Steven Spielberg', 'Roger Allers, Rob Minkoff', 'Mel Gibson',
+                 'Roman Polanski', 'M. Night Shyamalan', 'Steven Spielberg', 'Martin Scorsese', 'Frank Darabont',
+                 'Quentin Tarantino', 'Olivier Nakache, Éric Toledano', 'Peter Jackson', 'Christopher Nolan', 'Christopher Nolan',
+                 'Francis Ford Coppola', 'Frank Darabont', 'Peter Jackson', 'Francis Ford Coppola', 'Christopher Nolan',
+                 'Sidney Lumet', 'Peter Jackson', 'Lana Wachowski, Lilly Wachowski', 'Robert Zemeckis', 'Christopher Nolan',
+                 'Martin Scorsese', 'Milos Forman', 'Peter Jackson', 'Francis Ford Coppola'],
+    'Rating': [9.3, 9.2, 9.0, 8.9, 8.9,
+               8.8, 8.8, 8.7, 8.9, 8.8,
+               8.8, 8.6, 8.7, 8.7, 8.6,
+               8.7, 9.0, 8.6, 8.6, 8.5,
+               8.5, 8.5, 8.6, 8.5, 8.3,
+               8.5, 8.1, 8.6, 8.5, 8.6,
+               8.3, 8.5, 8.8, 8.5, 9.0,
+               8.9, 9.3, 8.9, 9.0, 8.9,
+               8.9, 8.7, 8.7, 8.8, 8.8,
+               8.7, 8.7, 8.8, 8.7]
+}
+import pandas as pd
+
+# Sample movie data
+movies = {
+    'Title': ['The Shawshank Redemption', 'The Godfather', 'The Dark Knight', 'Pulp Fiction', 'The Lord of the Rings: The Return of the King',
+              'Forrest Gump', 'Inception', 'The Matrix', 'Schindler\'s List', 'The Lord of the Rings: The Fellowship of the Ring',
+              'Fight Club', 'The Silence of the Lambs', 'The Lord of the Rings: The Two Towers', 'Star Wars: Episode V - The Empire Strikes Back',
+              'The Green Mile', 'Goodfellas', 'The Godfather: Part II', 'The Usual Suspects', 'Se7en', 'Gladiator',
+              'The Departed', 'The Prestige', 'Saving Private Ryan', 'The Lion King', 'Braveheart',
+              'The Pianist', 'The Sixth Sense', 'Schindler\'s List', 'The Departed', 'The Green Mile',
+              'Inglourious Basterds', 'The Intouchables', 'The Lord of the Rings: The Fellowship of the Ring', 'The Prestige', 'The Dark Knight',
+              'The Godfather', 'The Shawshank Redemption', 'The Lord of the Rings: The Return of the King', 'The Godfather: Part II', 'The Dark Knight',
+              '12 Angry Men', 'The Lord of the Rings: The Two Towers', 'The Matrix', 'Forrest Gump', 'Inception',
+              'Goodfellas', 'One Flew Over the Cuckoo\'s Nest', 'The Lord of the Rings: The Fellowship of the Ring', 'The Godfather: Part II'],
+    'Genre': ['Drama', 'Crime', 'Action', 'Crime', 'Adventure',
+              'Drama', 'Action', 'Action', 'Biography', 'Adventure',
+              'Drama', 'Crime', 'Adventure', 'Action', 'Drama',
+              'Crime', 'Crime', 'Crime', 'Crime', 'Crime',
+              'Crime', 'Drama', 'Drama', 'Animation', 'Biography',
+              'Biography', 'Drama', 'Biography', 'Crime', 'Drama',
+              'Drama', 'Comedy', 'Adventure', 'Drama', 'Action',
+              'Crime', 'Drama', 'Adventure', 'Crime', 'Action',
+              'Drama', 'Drama', 'Adventure', 'Drama', 'Action',
+              'Crime', 'Drama', 'Adventure', 'Crime'],
+    'Director': ['Frank Darabont', 'Francis Ford Coppola', 'Christopher Nolan', 'Quentin Tarantino', 'Peter Jackson',
+                 'Robert Zemeckis', 'Christopher Nolan', 'Lana Wachowski, Lilly Wachowski', 'Steven Spielberg', 'Peter Jackson',
+                 'David Fincher', 'Jonathan Demme', 'Peter Jackson', 'Irvin Kershner', 'Frank Darabont',
+                 'Martin Scorsese', 'Francis Ford Coppola', 'Bryan Singer', 'David Fincher', 'Ridley Scott',
+                 'Martin Scorsese', 'Christopher Nolan', 'Steven Spielberg', 'Roger Allers, Rob Minkoff', 'Mel Gibson',
+                 'Roman Polanski', 'M. Night Shyamalan', 'Steven Spielberg', 'Martin Scorsese', 'Frank Darabont',
+                 'Quentin Tarantino', 'Olivier Nakache, Éric Toledano', 'Peter Jackson', 'Christopher Nolan', 'Christopher Nolan',
+                 'Francis Ford Coppola', 'Frank Darabont', 'Peter Jackson', 'Francis Ford Coppola', 'Christopher Nolan',
+                 'Sidney Lumet', 'Peter Jackson', 'Lana Wachowski, Lilly Wachowski', 'Robert Zemeckis', 'Christopher Nolan',
+                 'Martin Scorsese', 'Milos Forman', 'Peter Jackson', 'Francis Ford Coppola'],
+    'Rating': [9.3, 9.2, 9.0, 8.9, 8.9,
+               8.8, 8.8, 8.7, 8.9, 8.8,
+               8.8, 8.6, 8.7, 8.7, 8.6,
+               8.7, 9.0, 8.6, 8.6, 8.5,
+               8.5, 8.5, 8.6, 8.5, 8.3,
+               8.5, 8.1, 8.6, 8.5, 8.6,
+               8.3, 8.5, 8.8, 8.5, 9.0,
+               8.9, 9.3, 8.9, 9.0, 8.9,
+               8.9, 8.7, 8.7, 8.8, 8.8,
+               8.7, 8.7, 8.8, 8.7]
+}
+
+# Creating DataFrame
+df = pd.DataFrame(movies)
+
+def recommend_movie(genre):
+    recommended = df[df['Genre'] == genre]
+    return recommended
+
+
+
+# Creating DataFrame
+df = pd.DataFrame(movies)
+
+def recommendd_movie(genre):
+    """
+    Recommends a movie based on genre.
+    
+    Parameters:
+        genre (str): The genre of the movie.
+        
+    Returns:
+        str: Recommended movie title.
+    """
+    genre_df = df[df['Genre'] == genre]
+    if not genre_df.empty:
+        top_movie = genre_df.loc[genre_df['Rating'].idxmax()]
+        return top_movie['Title']
+    else:
+        return "Sorry, no movies found in that genre."
+
+# Example usage
+genre = input("Enter your preferred genre: ")
+recommended_movie = recommendd_movie(genre)
+print("Top rated movie:", recommended_movie)
+print("Other recommendations for",genre,recommend_movie(genre))
